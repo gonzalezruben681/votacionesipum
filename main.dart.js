@@ -32300,14 +32300,7 @@ _.f=f
 _.r=g
 _.w=h
 _.x=i},
-aBb:function aBb(a,b,c,d,e,f){var _=this
-_.a=a
-_.b=b
-_.c=c
-_.d=d
-_.e=e
-_.f=f},
-aB5:function aB5(a,b,c,d,e,f,g){var _=this
+aBb:function aBb(a,b,c,d,e,f,g){var _=this
 _.a=a
 _.b=b
 _.c=c
@@ -32315,6 +32308,15 @@ _.d=d
 _.e=e
 _.f=f
 _.r=g},
+aB5:function aB5(a,b,c,d,e,f,g,h){var _=this
+_.a=a
+_.b=b
+_.c=c
+_.d=d
+_.e=e
+_.f=f
+_.r=g
+_.w=h},
 aB3:function aB3(a,b,c,d,e){var _=this
 _.a=a
 _.b=b
@@ -106057,7 +106059,7 @@ n.a=""
 A.aTE(l,new A.aAS(k,j),t.a,t.P)
 r=j.gm(j)
 q=k.gm(k)
-$.bB.ci(new A.kl(new A.aAT(n,p,b,new A.aAV(p,j,k,i,f,h),a),[r,q]),t.H)
+$.bB.ci(new A.kl(new A.aAT(n,p,b,new A.aAV(p,j,k,s,f,h),a),[r,q]),t.H)
 p.y=$.bB.ci(new A.iK(new A.aAU(),B.bH,t.hW),t.pp)
 q=t.N
 $.a8O().zt(A.V(["name",A.cw(A.b([B.aG,A.jp("^[a-zA-Z\xf1\xd1,\\s\xe1\xe9\xed\xf3\xfa\xc1\xc9\xcd\xd3\xda]+$")],t.g),n.a,q)],q,t.K))
@@ -106082,9 +106084,7 @@ $S:228}
 A.aAV.prototype={
 $0(){var s,r,q=this,p=q.b
 if(p.gm(p)){p=q.c
-if(p.gm(p)>0){s=q.d
-s=s.gm(s)}else s=!1
-if(s){s=q.a
+if(p.gm(p)>0&&q.d){s=q.a
 r=s.w
 r===$&&A.a()
 s=A.nh(B.D,B.ef,B.i,new A.aAW(s),u.F,B.i,"Estimado: "+s.f.a.a)
@@ -106203,7 +106203,7 @@ j=A.m_(A.QL("Selecciona un cargo",B.fp,A.S(f,!0,f.$ti.h("ak.E")),new A.aB9(d),B.
 f=A.bM(A.c5(A.b([B.dK,new A.lZ(h.e?new A.aBa(h.a,a,h.f,h.r,h.w,s,o,h.x,d):g,g,"Ronda uno",g)],n),B.n,B.a2,B.o),g,450)
 e=A.b([B.Ck],n)
 if(d.gm(d)==null)e.push(B.hp)
-else e.push(A.bM(h.y?A.nV(new A.aBb(h.a,q,r,h.z,h.r,h.x),q.length,g,B.H,!1):B.FW,300,g))
+else e.push(A.bM(h.y?A.nV(new A.aBb(h.a,q,r,h.z,h.w,h.x,h.r),q.length,g,B.H,!1):B.FW,300,g))
 return A.bG(g,A.iu(A.b6(A.b([B.cH,p,B.ao,j,B.ao,f,B.ao,A.bM(A.b6(e,B.c9,B.r,B.o),g,300)],n),B.n,B.a2,B.o),g,g,g,B.H),B.p,g,g,g,g,g,g,B.bD,g,g,g)},
 $S:121}
 A.aB6.prototype={
@@ -106230,15 +106230,15 @@ return s.a.atT(s.b,s.c,s.d,s.e,s.f,s.r,s.w,s.x)},
 $S:0}
 A.aBb.prototype={
 $2(a,b){var s=this,r=s.b[b],q=s.c,p=J.c(q.gm(q),b)?B.f9:null,o=s.d
-return new A.wA(r,p,o.gm(o)?new A.aB5(s.a,s.e,r,a,s.f,q,b):null,null)},
+return new A.wA(r,p,o.gm(o)?new A.aB5(s.a,s.e,a,r,s.f,s.r,q,b):null,null)},
 $S:724}
 A.aB5.prototype={
-$0(){var s,r=this,q=r.b
-if(!q.gm(q)&&r.c.c===0)A.aSo(!0,new A.aB3(r.c,r.e,q,r.f,r.r),r.d,t.z)
-else{q=r.a
-s=q.w
-s===$&&A.a()
-s.vv(A.nh(B.dl,B.ee,null,new A.aB4(q),"Ya has votado anteriormente",B.i,null),B.h7,B.cc)}},
+$0(){var s,r,q=this
+if(!q.b)A.aSo(!0,new A.aB3(q.d,q.e,q.f,q.r,q.w),q.c,t.z)
+else{s=q.a
+r=s.w
+r===$&&A.a()
+r.vv(A.nh(B.dl,B.ee,null,new A.aB4(s),"Ya has votado anteriormente",B.i,null),B.h7,B.cc)}},
 $S:7}
 A.aB3.prototype={
 $1(a){var s=this,r=null,q=s.a,p=A.aU("\xbfEst\xe1 seguro de que desea votar por "+q.b+"?",r,r,r,r,r,r,r,r,r,r,r,r)
