@@ -34,24 +34,5 @@
 </head>
 <body>
   <script src="flutter_bootstrap.js" async></script>
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('flutter_service_worker.js').then(registration => {
-        registration.onupdatefound = () => {
-          const newWorker = registration.installing;
-          newWorker.onstatechange = () => {
-            if (newWorker.state == 'installed') {
-              if (navigator.serviceWorker.controller) {
-                console.log('[SW] Nueva versión detectada, recargando...');
-                window.location.reload();
-              }
-            }
-          };
-        };
-      }).catch(err => {
-        console.warn('Error al registrar el SW:', err);
-      });
-    }
-  </script>
 </body>
 </html>
