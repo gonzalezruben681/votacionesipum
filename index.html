@@ -35,5 +35,50 @@
 <body>
   <script src="flutter_bootstrap.js" async></script>
   <script src="https://cdn.jsdelivr.net/npm/jsqr@1.3.1/dist/jsQR.min.js"></script>
+    <script>
+    if ('serviceWorker' in navigator) {
+      let refreshing = false;
+
+      // Paso 1: Escuchar el evento 'controllerchange'
+      // Este evento se dispara cuando un nuevo Service Worker toma el control de la página.
+      // Es el momento más seguro para recargar, ya que el nuevo SW está activo.
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        if (refreshing) return; // Evita bucles infinitos de recarga
+        refreshing = true; // Marca que ya estamos recargando
+
+        console.log('Nuevo Service Worker ha tomado el control. Recargando la página para aplicar la actualización...');
+
+        // Pequeño retardo para asegurar que el nuevo controlador esté completamente listo antes de recargar.
+        // Esto es una buena práctica para evitar race conditions.
+        setTimeout(() => {
+          window.location.reload();
+        }, 100);
+      });
+
+      // Paso 2: Intentar registrar el Service Worker y pedirle que busque actualizaciones.
+      // 'navigator.serviceWorker.ready' se resuelve cuando el SW está registrado y activo.
+      navigator.serviceWorker.ready.then(registration => {
+        console.log('Service Worker está listo. Solicitando actualización...');
+        registration.update(); // Pide al Service Worker que busque actualizaciones disponibles.
+
+        // Si ya hay un Service Worker en estado 'waiting' (es decir, una nueva versión descargada pero no activa),
+        // aquí es donde podríamos intentar forzar su activación.
+        // SIN EMBARGO, el flutter_service_worker.js por defecto NO TIENE UN MANEJADOR
+        // para mensajes como {type: 'SKIP_WAITING'}.
+        // Por lo tanto, esta parte del código, aunque lógicamente correcta para otros SWs,
+        // NO FORZARÁ LA ACTIVACIÓN del SW de Flutter automáticamente sin modificarlo.
+        // El 'controllerchange' es el que se encarga de la recarga *después* de la activación (que puede ocurrir
+        // por cierre de pestañas antiguas, recarga manual, o una lógica de activación interna del SW).
+        if (registration.waiting) {
+          console.log('Nueva versión del Service Worker encontrada y en estado "waiting".');
+          // Puedes aquí mismo lanzar un postMessage para tu SW si lo personalizaras,
+          // o simplemente esperar a que el 'controllerchange' se dispare.
+          // El 'controllerchange' es el mecanismo más confiable que tenemos sin modificar el SW de Flutter.
+        }
+      });
+    } else {
+      console.log('El navegador no soporta Service Workers.');
+    }
+  </script>
 </body>
 </html>
